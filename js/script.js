@@ -34,6 +34,21 @@ function displayRandomSpaceFact() {
   document.querySelector('.container').insertBefore(factElement, document.querySelector('.filters'));
 }
 
+// Generate array of dates between start and end date
+function getDateRange(startDate, endDate) {
+  const dates = [];
+  const current = new Date(startDate);
+  const end = new Date(endDate);
+  
+  // Add one day at a time until we reach the end date
+  while (current <= end) {
+    dates.push(current.toISOString().split('T')[0]);
+    current.setDate(current.getDate() + 1);
+  }
+  
+  return dates;
+}
+
 // Fetch NASA APOD data for a single date
 async function fetchAPODData(date) {
   try {
